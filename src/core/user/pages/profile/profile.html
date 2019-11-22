@@ -7,60 +7,113 @@
     <ion-refresher [enabled]="userLoaded" (ionRefresh)="refreshUser($event)">
         <ion-refresher-content pullingText="{{ 'core.pulltorefresh' | translate }}"></ion-refresher-content>
     </ion-refresher>
-    <core-loading [hideUntil]="userLoaded">
-        <ion-list *ngIf="user && !isDeleted && isEnrolled">
-            <ion-item text-center>
-                <ion-avatar core-user-avatar class="item-avatar-center" [user]="user" [userId]="user.id" [linkProfile]="false" [checkOnline]="true">
-                    <ion-icon name="create" class="core-icon-foreground" *ngIf="canChangeProfilePicture" (click)="changeProfilePicture()"></ion-icon>
-                </ion-avatar>
-                <h2>{{ user.fullname }}</h2>
-                <p *ngIf="user.address">{{ user.address }}</p>
-                <p *ngIf="user.roles" text-wrap>
-                    <strong>{{ 'core.user.roles' | translate}}</strong>{{'core.labelsep' | translate}}
-                    {{ user.roles }}
-                </p>
-            </ion-item>
+    <ion-content padding class="myview">
+        <!--
+        <ion-grid style="padding: 0px; text-align: center;">
+            <ion-row>
+                <ion-col>
+                    <img src="../../../../assets/img/perfil_icon.png" width="45px" alt="">
+                    <hr style="background-color: yellow; height: 5px; border-radius: 10px; margin-top: -3px;">
+                </ion-col>
+                <ion-col>
+                    <img src="../../../../assets/img/social_icon.png" width="45px" alt="">
+                </ion-col>
+                <ion-col>
+                    <img src="../../../../assets/img/notifi_icon.png" width="45px" alt="">
+                </ion-col>
+                <ion-col>
+                    <img src="../../../../assets/img/menu_icon.png" width="45px" alt="">
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="contador">
+                    <img src="../../../../assets/img/contadores.png" style="visibility: hidden;" alt="">
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        -->
+        <!-- <img src="../../../../assets/img/splash_evoke.jpg" alt=""> -->
+        <core-loading [hideUntil]="userLoaded">
+            <ion-list *ngIf="user && !isDeleted && isEnrolled">
+                <ion-item text-center>
+                    <ion-avatar core-user-avatar class="item-avatar-center" [user]="user" [userId]="user.id"
+                        [linkProfile]="false" [checkOnline]="true">
+                        <ion-icon name="create" class="core-icon-foreground" *ngIf="canChangeProfilePicture"
+                            (click)="changeProfilePicture()"></ion-icon>
+                    </ion-avatar>
+                    <h2>{{ user.fullname }}</h2>
+                    <p *ngIf="user.address">{{ user.address }}</p>
+                    <p *ngIf="user.roles" text-wrap>
+                        <strong>{{ 'core.user.roles' | translate}}</strong>{{'core.labelsep' | translate}}
+                        {{ user.roles }}
+                    </p>
+                </ion-item>
+                <ion-grid class="core-user-communication-handlers"
+                    *ngIf="(communicationHandlers && communicationHandlers.length) || isLoadingHandlers">
+                    <ion-row no-padding justify-content-between
+                        *ngIf="communicationHandlers && communicationHandlers.length">
+                        <ion-col align-self-center *ngFor="let comHandler of communicationHandlers" text-center>
+                            <a (click)="handlerClicked($event, comHandler)"
+                                [ngClass]="['core-user-profile-handler', comHandler.class]"
+                                title="{{comHandler.title | translate}}" tappable>
+                                <core-icon [name]="comHandler.icon"></core-icon>
+                                <p>{{comHandler.title | translate}}</p>
+                            </a>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row no-padding>
+                        <ion-col text-center class="core-loading-handlers" *ngIf="isLoadingHandlers">
+                            <ion-spinner></ion-spinner>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <a ion-item text-wrap class="core-user-profile-handler" (click)="openUserDetails()"
+                    title="{{ 'core.user.details' | translate }}">
+                    <ion-icon name="person" item-start></ion-icon>
+                    <h2>{{ 'core.user.details' | translate }}</h2>
+                </a>
+                <ion-item text-center class="core-loading-handlers" *ngIf="isLoadingHandlers">
+                    <ion-spinner></ion-spinner>
+                </ion-item>
+                <a *ngFor="let npHandler of newPageHandlers" ion-item text-wrap
+                    [ngClass]="['core-user-profile-handler', npHandler.class]"
+                    (click)="handlerClicked($event, npHandler)" [hidden]="npHandler.hidden"
+                    title="{{ npHandler.title | translate }}">
+                    <core-icon *ngIf="npHandler.icon" [name]="npHandler.icon" item-start></core-icon>
+                    <h2>{{ npHandler.title | translate }}</h2>
+                </a>
+                <ion-item *ngIf="actionHandlers && actionHandlers.length">
+                    <button *ngFor="let actHandler of actionHandlers" ion-button block outline
+                        [ngClass]="['core-user-profile-handler', actHandler.class]"
+                        (click)="handlerClicked($event, actHandler)" [hidden]="actHandler.hidden"
+                        title="{{ actHandler.title | translate }}" icon-start [disabled]="actHandler.spinner">
+                        <core-icon *ngIf="actHandler.icon" [name]="actHandler.icon" start></core-icon>
+                        <span>{{ actHandler.title | translate }}</span>
+                        <ion-spinner *ngIf="actHandler.spinner"></ion-spinner>
+                    </button>
+                </ion-item>
+            </ion-list>
+            <core-empty-box *ngIf="!user && !isDeleted && isEnrolled" icon="person"
+                [message]=" 'core.user.detailsnotavailable' | translate"></core-empty-box>
 
-            <ion-grid class="core-user-communication-handlers" *ngIf="(communicationHandlers && communicationHandlers.length) || isLoadingHandlers">
-                <ion-row no-padding justify-content-between *ngIf="communicationHandlers && communicationHandlers.length">
-                    <ion-col align-self-center *ngFor="let comHandler of communicationHandlers" text-center>
-                        <a (click)="handlerClicked($event, comHandler)" [ngClass]="['core-user-profile-handler', comHandler.class]" title="{{comHandler.title | translate}}" tappable>
-                            <core-icon [name]="comHandler.icon"></core-icon>
-                            <p>{{comHandler.title | translate}}</p>
-                        </a>
-                    </ion-col>
-                </ion-row>
-                <ion-row no-padding>
-                    <ion-col text-center class="core-loading-handlers" *ngIf="isLoadingHandlers">
-                        <ion-spinner></ion-spinner>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-            <a ion-item text-wrap class="core-user-profile-handler" (click)="openUserDetails()" title="{{ 'core.user.details' | translate }}">
-                <ion-icon name="person" item-start></ion-icon>
-                <h2>{{ 'core.user.details' | translate }}</h2>
-            </a>
-            <ion-item text-center class="core-loading-handlers" *ngIf="isLoadingHandlers">
-                <ion-spinner></ion-spinner>
-            </ion-item>
-
-            <a *ngFor="let npHandler of newPageHandlers" ion-item text-wrap [ngClass]="['core-user-profile-handler', npHandler.class]" (click)="handlerClicked($event, npHandler)" [hidden]="npHandler.hidden" title="{{ npHandler.title | translate }}">
-                <core-icon *ngIf="npHandler.icon" [name]="npHandler.icon" item-start></core-icon>
-                <h2>{{ npHandler.title | translate }}</h2>
-            </a>
-
-            <ion-item *ngIf="actionHandlers && actionHandlers.length">
-                <button *ngFor="let actHandler of actionHandlers" ion-button block outline [ngClass]="['core-user-profile-handler', actHandler.class]" (click)="handlerClicked($event, actHandler)" [hidden]="actHandler.hidden" title="{{ actHandler.title | translate }}" icon-start [disabled]="actHandler.spinner">
-                    <core-icon *ngIf="actHandler.icon" [name]="actHandler.icon" start></core-icon>
-                    <span>{{ actHandler.title | translate }}</span>
-                    <ion-spinner *ngIf="actHandler.spinner"></ion-spinner>
-                </button>
-            </ion-item>
-        </ion-list>
-        <core-empty-box *ngIf="!user && !isDeleted && isEnrolled" icon="person" [message]=" 'core.user.detailsnotavailable' | translate"></core-empty-box>
-
-        <core-empty-box *ngIf="isDeleted" icon="person" [message]="'core.userdeleted' | translate"></core-empty-box>
-        <core-empty-box *ngIf="!isEnrolled" icon="person" [message]="'core.notenrolledprofile' | translate"></core-empty-box>
-    </core-loading>
+            <core-empty-box *ngIf="isDeleted" icon="person" [message]="'core.userdeleted' | translate"></core-empty-box>
+            <core-empty-box *ngIf="!isEnrolled" icon="person" [message]="'core.notenrolledprofile' | translate">
+            </core-empty-box>
+        </core-loading>
+        <!--
+        <ion-grid>
+            <ion-row>
+                <ion-col style="padding: 0px;">
+                    <img src="../../../../assets/img/habilidad.png" alt="">
+                </ion-col>
+                <ion-col style="padding: 0px;">
+                    <img src="../../../../assets/img/tienda.png" height="90px" style="margin-top: -5px;" alt="">
+                </ion-col>
+                <ion-col style="padding: 0px;">
+                    <img src="../../../../assets/img/equipo.png" alt="">
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        -->
+    </ion-content>
 </ion-content>

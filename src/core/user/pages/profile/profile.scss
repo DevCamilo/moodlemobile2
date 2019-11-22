@@ -1,4 +1,21 @@
 ion-app.app-root page-core-user-profile {
+    .myview {
+        background-image: url('../../../../assets/img/splash_evoke.jpg');
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+    .habilidad{
+        background-image: url('../../../../assets/img/habilidad.png');
+        background-repeat: no-repeat;
+        background-size:cover;
+        color: #fff;
+    }
+    .contador{
+        background-image: url('../../../../assets/img/contadores.png');
+        background-repeat: no-repeat;
+        background-size:cover;
+        color: #fff;
+    }
     .core-icon-foreground {
         position: absolute;
         @include position(null, 0, 0, null);
