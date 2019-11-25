@@ -6,6 +6,10 @@ ion-app.app-root page-core-mainmenu {
         transition: margin 500ms ease-in-out, transform 300ms ease-in-out;
     }
 
+    .tab-button[aria-selected=true] .tab-button-icon{
+        color: #FFDB43;
+    }
+
     .ion-md-fa-graduation-cap,
     .ion-ios-fa-graduation-cap,
     .ion-ios-fa-graduation-cap-outline,

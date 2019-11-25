@@ -166,4 +166,11 @@ ion-app.app-root.ios, ion-app.app-root.md, ion-app.app-root.wp {
         top: 0 !important;
         height: 100% !important;
     }
+    ion-content core-tabs core-tab ion-content{
+        background-image: url("../../assets/img/background_app.jpg");
+        background-size: 100% 100%;
+    }
+    ion-content core-tabs core-tab ion-content .scroll-content{
+        background: transparent;
+    }
 }

@@ -3,6 +3,7 @@ $core-sidetab-size: 60px !default;
 ion-app.app-root core-ion-tabs {
     .tabbar {
         z-index: 101; // For some reason, the regular z-index isn't enough with our tabs, use a higher one.
+        background-color: $purple-evoke;
 
         .core-ion-tabs-loading {
             height: 100%;
@@ -24,8 +25,13 @@ ion-app.app-root core-ion-tabs {
     }
 
     &[tabsplacement="bottom"] {
+        .ion-page > ion-content{
+            background-image: url("../../assets/img/background_app.jpg");
+            background-size: 100% 100%;
+        }
         .ion-page > ion-content > .scroll-content {
             margin-bottom: $navbar-md-height;
+            background: transparent;
         }
     }
 

@@ -73,8 +73,14 @@ ion-app.app-root {
     }
   }
 
+  .has-refresher{
+    background-image: url("../assets/img/background_app.jpg");
+    background-size: 100% 100%;
+  }
+
   .has-refresher > .scroll-content {
     border-top: 0 !important;
+    background: transparent;
   }
 
   // Define an alternative way to set a heading in an item without using a heading tag.
