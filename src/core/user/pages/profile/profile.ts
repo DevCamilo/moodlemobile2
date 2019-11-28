@@ -25,6 +25,7 @@ import { CoreMimetypeUtilsProvider } from '@providers/utils/mimetype';
 import { CoreFileUploaderHelperProvider } from '@core/fileuploader/providers/helper';
 import { CoreUserDelegate, CoreUserProfileHandlerData } from '../../providers/user-delegate';
 import { CoreSplitViewComponent } from '@components/split-view/split-view';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 /**
  * Page that displays an user profile page.
@@ -45,6 +46,7 @@ export class CoreUserProfilePage {
     isLoadingHandlers = false;
     user: any;
     title: string;
+    evocoins: string;
     isDeleted = false;
     isEnrolled = true;
     canChangeProfilePicture = false;
@@ -53,11 +55,12 @@ export class CoreUserProfilePage {
     communicationHandlers: CoreUserProfileHandlerData[] = [];
 
     constructor(navParams: NavParams, private userProvider: CoreUserProvider, private userHelper: CoreUserHelperProvider,
-            private domUtils: CoreDomUtilsProvider, private translate: TranslateService, private eventsProvider: CoreEventsProvider,
-            private coursesProvider: CoreCoursesProvider, private sitesProvider: CoreSitesProvider,
-            private mimetypeUtils: CoreMimetypeUtilsProvider, private fileUploaderHelper: CoreFileUploaderHelperProvider,
-            private userDelegate: CoreUserDelegate, private navCtrl: NavController,
-            @Optional() private svComponent: CoreSplitViewComponent) {
+        private domUtils: CoreDomUtilsProvider, private translate: TranslateService, private eventsProvider: CoreEventsProvider,
+        private coursesProvider: CoreCoursesProvider, private sitesProvider: CoreSitesProvider,
+        private mimetypeUtils: CoreMimetypeUtilsProvider, private fileUploaderHelper: CoreFileUploaderHelperProvider,
+        private userDelegate: CoreUserDelegate, private navCtrl: NavController,
+        private http: HttpClient,
+        @Optional() private svComponent: CoreSplitViewComponent) {
         this.userId = navParams.get('userId');
         this.courseId = navParams.get('courseId');
 
@@ -77,6 +80,16 @@ export class CoreUserProfilePage {
                 this.user.address = this.userHelper.formatAddress('', data.user.city, data.user.country);
             }
         }, sitesProvider.getCurrentSiteId());
+    }
+
+    evocoinAPI(){
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0IiwiaWF0IjoxNTcyMzg2OTc0LCJzZWNyZXQiOiIxMSszRXYxdjBvM2tLa2VfNCJ9.jkTrhT-KoTjU9iITyPJlxBLovfBDEPVDLgJU5PhF2HY'
+            })
+        };
+        return this.http.post('http://40.117.251.59/account/balance-of', { id_gg: '109349604256072442240' }, httpOptions);
     }
 
     /**
@@ -219,7 +232,7 @@ export class CoreUserProfilePage {
     openUserDetails(): void {
         // Decide which navCtrl to use. If this page is inside a split view, use the split view's master nav.
         const navCtrl = this.svComponent ? this.svComponent.getMasterNav() : this.navCtrl;
-        navCtrl.push('CoreUserAboutPage', {courseId: this.courseId, userId: this.userId});
+        navCtrl.push('CoreUserAboutPage', { courseId: this.courseId, userId: this.userId });
     }
 
     /**
@@ -237,6 +250,14 @@ export class CoreUserProfilePage {
     /**
      * Page destroyed.
      */
+    ngOnInit(): void {
+        this.evocoinAPI().subscribe((res: any) => {
+            console.log(res);
+            console.log(this.userId);
+            this.evocoins = res.evocoin;
+        })
+    }
+
     ngOnDestroy(): void {
         this.subscription && this.subscription.unsubscribe();
         this.obsProfileRefreshed && this.obsProfileRefreshed.off();
