@@ -3,6 +3,7 @@ ion-app.app-root core-courses-course-progress {
         display: flex;
         flex-direction: column;
         align-self: stretch;
+        background-color: transparent !important;
 
         @for $i from 0 to length($core-course-image-background) {
             &[course-color="#{$i}"] {
@@ -10,6 +11,14 @@ ion-app.app-root core-courses-course-progress {
                     background: nth($core-course-image-background, $i + 1);
                 }
             }
+        }
+
+        .item-md{
+            background-color: rgba(51, 58, 71, 0.4);
+        }
+
+        ion-label button, ion-label h2{
+            color: white;
         }
 
         .core-course-thumb {
