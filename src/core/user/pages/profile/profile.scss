@@ -1,20 +1,74 @@
 ion-app.app-root page-core-user-profile {
-    .myview {
-        background-image: url('../../../../assets/img/splash_evoke.jpg');
-        background-repeat: no-repeat;
-        background-size:cover;
+    .scroll-content{
+        margin-bottom: 0 !important;
     }
-    .habilidad{
-        background-image: url('../../../../assets/img/habilidad.png');
-        background-repeat: no-repeat;
-        background-size:cover;
-        color: #fff;
+    .bottom-menu-item{
+        padding: 0;
+        margin: 0;
+        position: relative;
+        min-height: 90px;
     }
-    .contador{
-        background-image: url('../../../../assets/img/contadores.png');
-        background-repeat: no-repeat;
-        background-size:cover;
-        color: #fff;
+    .bottom-menu-item img{
+        position: absolute;
+        width: 100%;
+    }
+    .bottom-menu-item span{
+        position: absolute;
+        color: white;
+        top: 57%;
+        width: 100%;
+        text-align: center;
+    }
+    .avatar{
+        background: url("../assets/img/profile/avatar_bg.png") !important;
+        background-color: transparent !important;
+        background-size: 100% 100% !important;
+        padding: 0 !important;
+        height: 320px !important;
+    }
+    .item-avatar-center{
+        width: 60% !important;
+    }
+    .item-avatar-center img{
+        border-radius: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        max-width: none !important;
+        max-height: none !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+    .item h2{
+        color: white;
+    }
+    h3.page-title{
+        color: #14DFF4;
+        padding: 0 10%;
+        font-size: 2em;
+        margin: 15px 0 0 0 !important;
+    }
+    .container-evocoins{
+        background: url("../assets/img/profile/evocoins_container.png") !important;
+        background-size: 100% 100% !important;
+        background-repeat: no-repeat !important;
+        background-position-x: 100% !important;
+    }
+    .container-evocoins .row, .container-evocoins .col{
+        padding: 0 !important;
+    }
+    img.evocoins-image{
+        max-width: 35px;
+        margin-top: 7%;
+        float: right;
+    }
+    span.evocoins-number{
+        color: white;
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+    .container-evocoins span.evocoins-label{
+        color: white;
+        font-size: 0.9em;
     }
     .core-icon-foreground {
         position: absolute;

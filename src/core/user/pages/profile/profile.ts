@@ -222,6 +222,11 @@ export class CoreUserProfilePage {
         navCtrl.push('CoreUserAboutPage', {courseId: this.courseId, userId: this.userId});
     }
 
+    goToBadgedList(): void {
+        const navCtrl = this.svComponent ? this.svComponent.getMasterNav() : this.navCtrl;
+        navCtrl.push('CoreUserSkillsPage', {courseId: this.courseId, userId: this.userId});
+    }
+
     /**
      * A handler was clicked.
      *
