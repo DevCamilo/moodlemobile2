@@ -42,7 +42,8 @@
                             (click)="changeProfilePicture()"></ion-icon>
                     </ion-avatar>
                     <h2>{{ user.fullname }}</h2>
-                    <h3>Evocoins: {{evocoins}}</h3>
+                    <h3 *ngIf="statusRequest" >Evocoins: {{evocoins}}</h3>
+                    <h3 *ngIf="!statusRequest" >Aun no tienes Evocoins</h3>
                     <p *ngIf="user.address">{{ user.address }}</p>
                     <p *ngIf="user.roles" text-wrap>
                         <strong>{{ 'core.user.roles' | translate}}</strong>{{'core.labelsep' | translate}}

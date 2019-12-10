@@ -47,6 +47,7 @@ export class CoreUserProfilePage {
     user: any;
     title: string;
     evocoins: string;
+    statusRequest: boolean = false;
     isDeleted = false;
     isEnrolled = true;
     canChangeProfilePicture = false;
@@ -89,7 +90,7 @@ export class CoreUserProfilePage {
                 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0IiwiaWF0IjoxNTcyMzg2OTc0LCJzZWNyZXQiOiIxMSszRXYxdjBvM2tLa2VfNCJ9.jkTrhT-KoTjU9iITyPJlxBLovfBDEPVDLgJU5PhF2HY'
             })
         };
-        return this.http.post('http://40.117.251.59/account/balance-of', { id_gg: '109349604256072442240' }, httpOptions);
+        return this.http.post('http://40.117.251.59/account/balance-of', { id_moodle: this.userId }, httpOptions);
     }
 
     /**
@@ -252,9 +253,14 @@ export class CoreUserProfilePage {
      */
     ngOnInit(): void {
         this.evocoinAPI().subscribe((res: any) => {
-            console.log(res);
-            console.log(this.userId);
-            this.evocoins = res.evocoin;
+            //console.log(res);
+            if(res.status){
+                this.statusRequest = true;
+                this.evocoins = res.evocoin;
+            } else {
+
+            }
+            //console.log(this.userId);
         })
     }
 
