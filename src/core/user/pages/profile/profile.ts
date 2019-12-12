@@ -16,6 +16,7 @@ import { Component, Optional } from '@angular/core';
 import { IonicPage, NavParams, NavController } from 'ionic-angular';
 import { CoreUserProvider } from '../../providers/user';
 import { CoreUserHelperProvider } from '../../providers/helper';
+import { CoreCourseHelperProvider } from '../../../course/providers/helper';
 import { CoreDomUtilsProvider } from '@providers/utils/dom';
 import { TranslateService } from '@ngx-translate/core';
 import { CoreCoursesProvider } from '@core/courses/providers/courses';
@@ -51,12 +52,13 @@ export class CoreUserProfilePage {
     actionHandlers: CoreUserProfileHandlerData[] = [];
     newPageHandlers: CoreUserProfileHandlerData[] = [];
     communicationHandlers: CoreUserProfileHandlerData[] = [];
+    course: any;
 
     constructor(navParams: NavParams, private userProvider: CoreUserProvider, private userHelper: CoreUserHelperProvider,
             private domUtils: CoreDomUtilsProvider, private translate: TranslateService, private eventsProvider: CoreEventsProvider,
             private coursesProvider: CoreCoursesProvider, private sitesProvider: CoreSitesProvider,
             private mimetypeUtils: CoreMimetypeUtilsProvider, private fileUploaderHelper: CoreFileUploaderHelperProvider,
-            private userDelegate: CoreUserDelegate, private navCtrl: NavController,
+            private userDelegate: CoreUserDelegate, private navCtrl: NavController, private courseHelper: CoreCourseHelperProvider,
             @Optional() private svComponent: CoreSplitViewComponent) {
         this.userId = navParams.get('userId');
         this.courseId = navParams.get('courseId');
@@ -77,6 +79,9 @@ export class CoreUserProfilePage {
                 this.user.address = this.userHelper.formatAddress('', data.user.city, data.user.country);
             }
         }, sitesProvider.getCurrentSiteId());
+         this.courseHelper.getCourse(11).then((data) => {
+             this.course = data.course;
+        });
     }
 
     /**
@@ -223,8 +228,15 @@ export class CoreUserProfilePage {
     }
 
     goToBadgedList(): void {
-        const navCtrl = this.svComponent ? this.svComponent.getMasterNav() : this.navCtrl;
-        navCtrl.push('CoreUserSkillsPage', {courseId: this.courseId, userId: this.userId});
+        this.navCtrl.push('AddonBadgesUserBadgesPage', {courseId: this.course.id, userId: this.user.id});
+    }
+
+    goToParticipantList(): void {
+        this.navCtrl.push('CoreUserParticipantsPage', {courseId: this.course.id});
+    }
+
+    goToCompetenciesList(): void {
+        this.navCtrl.push('AddonCompetencyCourseCompetenciesPage', {courseId: this.course.id, userId: this.user.id});
     }
 
     /**

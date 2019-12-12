@@ -75,7 +75,7 @@
                 </ion-grid>
                 <ion-grid>
                     <ion-row>
-                        <ion-col class="bottom-menu-item">
+                        <ion-col class="bottom-menu-item" (click)="goToCompetenciesList()">
                             <img src="./assets/img/profile/skills.png" alt="">
                             <span>Habilidades</span>
                         </ion-col>
@@ -83,7 +83,7 @@
                             <img src="./assets/img/profile/badges.png" height="90px" style="margin-top: -5px;" alt="">
                             <span>Insignias</span>
                         </ion-col>
-                        <ion-col class="bottom-menu-item">
+                        <ion-col class="bottom-menu-item" (click)="goToParticipantList()">
                             <img src="./assets/img/profile/team.png" alt="">
                             <span>Equipo</span>
                         </ion-col>
