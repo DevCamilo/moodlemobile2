@@ -28,6 +28,7 @@ ion-app.app-root core-ion-tabs {
         .ion-page > ion-content{
             background-image: url("../../assets/img/background_app.jpg");
             background-size: 100% 100%;
+            //background: transparent;
         }
         .ion-page > ion-content > .scroll-content {
             margin-bottom: $navbar-md-height;

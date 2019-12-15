@@ -64,6 +64,7 @@ export class CoreTabsComponent implements OnInit, AfterViewInit, OnChanges, OnDe
     direction = 'ltr';
     description = '';
     lastScroll = 0;
+    iconClass = '';
 
     protected originalTabsContainer: HTMLElement; // The container of the original tabs. It will include each tab's content.
     protected initialized = false;
@@ -537,6 +538,21 @@ export class CoreTabsComponent implements OnInit, AfterViewInit, OnChanges, OnDe
         this.tabs.forEach((tab, index) => {
             tab.updateAriaHidden();
         });
+    }
+
+    getSlideIcon(title: string): string {
+        switch (title) {
+            case 'Participantes' || 'Participants':
+                return 'icon fa fa-users';
+            case 'Competencias' || 'Competencies':
+                return 'icon fa fa-bar-chart';
+            case 'Calificaciones' || 'Grades':
+                return 'icon fa fa-line-chart';
+            case 'Contenidos' || 'Contents':
+                return 'icon fa fa-newspaper-o';
+            default:
+                return '';
+        }
     }
 
     /**

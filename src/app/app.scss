@@ -73,9 +73,13 @@ ion-app.app-root {
     }
   }
 
-  .has-refresher{
+  .menu-inner{
     background-image: url("../assets/img/background_app.jpg");
     background-size: 100% 100%;
+  }
+
+  .has-refresher{
+    background: transparent;
   }
 
   .has-refresher > .scroll-content {
@@ -888,7 +892,8 @@ ion-app.app-root {
 
   // For some reason, in iOS the pages don't inherit the background-color from ion-app, set it explicitly.
   .ion-page {
-    background-color: $background-color;
+    //background-color: $background-color;
+    background: transparent;
   }
 
   // Embed video responsive classes.

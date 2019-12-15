@@ -6,6 +6,10 @@ ion-app.app-root .core-tabs-bar {
     width: 100%;
     background: $core-top-tabs-background;
 
+    .swiper-container .swiper-wrapper{
+        transform: none !important;
+    }
+
     .row {
         width: 100%;
     }
@@ -21,7 +25,7 @@ ion-app.app-root .core-tabs-bar {
         margin: 0 auto !important;
         display: flex;
         flex: none;
-        min-width: 100px;
+        width: 25% !important;
 
         div {
             text-overflow: ellipsis;
@@ -167,8 +171,9 @@ ion-app.app-root.ios, ion-app.app-root.md, ion-app.app-root.wp {
         height: 100% !important;
     }
     ion-content core-tabs core-tab ion-content{
-        background-image: url("../../assets/img/background_app.jpg");
-        background-size: 100% 100%;
+        //background-image: url("../../assets/img/background_app.jpg");
+        //background-size: 100% 100%;
+        background: transparent;
     }
     ion-content core-tabs core-tab ion-content .scroll-content{
         background: transparent;

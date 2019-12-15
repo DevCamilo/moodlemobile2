@@ -1,3 +1,20 @@
+page-addon-notifications-list ion-card.card-md{
+    background-color: rgba(51, 58, 71, 0.8) !important;
+}
+
+page-addon-notifications-list ion-card.card-md .item-md{
+    background: transparent;
+}
+
+page-addon-notifications-list ion-card.card-md .item-md ion-label p,
+page-addon-notifications-list ion-card.card-md .item-md ion-label h2{
+    color: white !important;
+}
+
+page-addon-notifications-list ion-card.card-md .item-md ion-label a{
+    color: #FFDB43;
+}
+
 page-addon-notifications-list .core-notification-icon {
     width: 34px;
     height: 34px;

@@ -8,47 +8,51 @@
         <ion-refresher-content pullingText="{{ 'core.pulltorefresh' | translate }}"></ion-refresher-content>
     </ion-refresher>
     <ion-content padding class="myview">
-        <!--
-        <ion-grid style="padding: 0px; text-align: center;">
-            <ion-row>
+        <ion-grid>
+            <ion-row class="container-evocoins">
                 <ion-col>
-                    <img src="../../../../assets/img/perfil_icon.png" width="45px" alt="">
-                    <hr style="background-color: yellow; height: 5px; border-radius: 10px; margin-top: -3px;">
+                    <h3 class="page-title">Perfil</h3>
                 </ion-col>
                 <ion-col>
-                    <img src="../../../../assets/img/social_icon.png" width="45px" alt="">
-                </ion-col>
-                <ion-col>
-                    <img src="../../../../assets/img/notifi_icon.png" width="45px" alt="">
-                </ion-col>
-                <ion-col>
-                    <img src="../../../../assets/img/menu_icon.png" width="45px" alt="">
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col class="contador">
-                    <img src="../../../../assets/img/contadores.png" style="visibility: hidden;" alt="">
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col size="3">
+                                <img class="evocoins-image" src="./assets/img/profile/evocoins_icon.png" alt="">
+                            </ion-col>
+                            <ion-col size="9">
+                                <ion-grid>
+                                    <ion-row>
+                                        <ion-col>
+                                            <span class="evocoins-number">30</span>
+                                        </ion-col>
+                                    </ion-row>
+                                    <ion-row>
+                                        <ion-col>
+                                            <span class="evocoins-label">Evocoins</span>
+                                        </ion-col>
+                                    </ion-row>
+                                </ion-grid>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
                 </ion-col>
             </ion-row>
         </ion-grid>
-        -->
-        <!-- <img src="../../../../assets/img/splash_evoke.jpg" alt=""> -->
+
         <core-loading [hideUntil]="userLoaded">
             <ion-list *ngIf="user && !isDeleted && isEnrolled">
-                <ion-item text-center>
+                <ion-item text-center class="avatar">
                     <ion-avatar core-user-avatar class="item-avatar-center" [user]="user" [userId]="user.id"
                         [linkProfile]="false" [checkOnline]="true">
                         <ion-icon name="create" class="core-icon-foreground" *ngIf="canChangeProfilePicture"
                             (click)="changeProfilePicture()"></ion-icon>
                     </ion-avatar>
                     <h2>{{ user.fullname }}</h2>
-                    <h3 *ngIf="statusRequest" >Evocoins: {{evocoins}}</h3>
-                    <h3 *ngIf="!statusRequest" >Aun no tienes Evocoins</h3>
-                    <p *ngIf="user.address">{{ user.address }}</p>
+                    <!--<p *ngIf="user.address">{{ user.address }}</p>
                     <p *ngIf="user.roles" text-wrap>
                         <strong>{{ 'core.user.roles' | translate}}</strong>{{'core.labelsep' | translate}}
                         {{ user.roles }}
-                    </p>
+                    </p>-->
                 </ion-item>
                 <ion-grid class="core-user-communication-handlers"
                     *ngIf="(communicationHandlers && communicationHandlers.length) || isLoadingHandlers">
@@ -69,7 +73,23 @@
                         </ion-col>
                     </ion-row>
                 </ion-grid>
-                <a ion-item text-wrap class="core-user-profile-handler" (click)="openUserDetails()"
+                <ion-grid>
+                    <ion-row>
+                        <ion-col class="bottom-menu-item" (click)="goToCompetenciesList()">
+                            <img src="./assets/img/profile/skills.png" alt="">
+                            <span>Habilidades</span>
+                        </ion-col>
+                        <ion-col class="bottom-menu-item" (click)="goToBadgedList()">
+                            <img src="./assets/img/profile/badges.png" height="90px" style="margin-top: -5px;" alt="">
+                            <span>Insignias</span>
+                        </ion-col>
+                        <ion-col class="bottom-menu-item" (click)="goToParticipantList()">
+                            <img src="./assets/img/profile/team.png" alt="">
+                            <span>Equipo</span>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+                <!--<a ion-item text-wrap class="core-user-profile-handler" (click)="openUserDetails()"
                     title="{{ 'core.user.details' | translate }}">
                     <ion-icon name="person" item-start></ion-icon>
                     <h2>{{ 'core.user.details' | translate }}</h2>
@@ -93,7 +113,7 @@
                         <span>{{ actHandler.title | translate }}</span>
                         <ion-spinner *ngIf="actHandler.spinner"></ion-spinner>
                     </button>
-                </ion-item>
+                </ion-item>-->
             </ion-list>
             <core-empty-box *ngIf="!user && !isDeleted && isEnrolled" icon="person"
                 [message]=" 'core.user.detailsnotavailable' | translate"></core-empty-box>
@@ -102,20 +122,6 @@
             <core-empty-box *ngIf="!isEnrolled" icon="person" [message]="'core.notenrolledprofile' | translate">
             </core-empty-box>
         </core-loading>
-        <!--
-        <ion-grid>
-            <ion-row>
-                <ion-col style="padding: 0px;">
-                    <img src="../../../../assets/img/habilidad.png" alt="">
-                </ion-col>
-                <ion-col style="padding: 0px;">
-                    <img src="../../../../assets/img/tienda.png" height="90px" style="margin-top: -5px;" alt="">
-                </ion-col>
-                <ion-col style="padding: 0px;">
-                    <img src="../../../../assets/img/equipo.png" alt="">
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-        -->
+
     </ion-content>
 </ion-content>

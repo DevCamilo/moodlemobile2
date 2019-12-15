@@ -1,9 +1,12 @@
+ion-app.app-root {
+    background-image: url("../../assets/img/background_app.jpg");
+    background-size: 100% 100%;
+}
 ion-app.app-root page-core-login-credentials,
 ion-app.app-root page-core-login-reconnect,
 ion-app.app-root page-core-login-site {
-    .scroll-content {
-        background-image: url("../../assets/img/background_app.jpg");
-        background-size: 100% 100%;
+    .scroll-content, ion-content {
+        background: transparent;
 
         @include darkmode() {
             background: $core-dark-login-page-background-color;
@@ -22,8 +25,8 @@ ion-app.app-root page-core-login-site {
     .box {
         padding: 16px;
         margin: 8px;
-        background-color: rgba(245,245,245, 0.4);
-        color: $core-login-box-text-color;
+        background-color: rgba(51, 58, 71, 0.4);
+        color: white;
 
         @include darkmode() {
             background: $core-dark-login-box-background-color;

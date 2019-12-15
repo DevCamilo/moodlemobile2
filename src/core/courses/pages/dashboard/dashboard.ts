@@ -253,4 +253,10 @@ export class CoreCoursesDashboardPage implements OnDestroy {
         this.isDestroyed = true;
         this.updateSiteObserver && this.updateSiteObserver.off();
     }
+
+    goToProfile(): void {
+        this.userId = this.sitesProvider.getCurrentSiteUserId();
+        console.log({userId: this.userId});
+        this.navCtrl.push('CoreUserProfilePage', {userId: this.userId});
+    }
 }

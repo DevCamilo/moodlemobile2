@@ -63,6 +63,11 @@
                         <ion-refresher-content pullingText="{{ 'core.pulltorefresh' | translate }}"></ion-refresher-content>
                     </ion-refresher>
                     <core-courses-my-courses></core-courses-my-courses>
+                    <ion-row>
+                        <ion-col class="profileButton" offset-2 col-8 (click)="goToProfile()">
+                            <h3>Mi Perfil</h3>
+                        </ion-col>
+                    </ion-row>
                 </ion-content>
             </ng-template>
         </core-tab>
