@@ -542,9 +542,9 @@ export class CoreTabsComponent implements OnInit, AfterViewInit, OnChanges, OnDe
 
     getSlideIcon(title: string): string {
         switch (title) {
-            case 'Participantes' || 'Participants':
+            case 'Equipo' || 'Participants':
                 return 'icon fa fa-users';
-            case 'Competencias' || 'Competencies':
+            case 'Habilidades' || 'Competencies':
                 return 'icon fa fa-bar-chart';
             case 'Calificaciones' || 'Grades':
                 return 'icon fa fa-line-chart';

@@ -244,18 +244,14 @@ export class CoreUserProfilePage {
     }
 
     goToBadgedList(): void {
-        console.log({courseId: this.course.id, userId: this.userId});
         this.navCtrl.push('AddonBadgesUserBadgesPage', {courseId: this.course.id, userId: this.userId});
     }
 
     goToParticipantList(): void {
-        console.log({courseId: this.course.id});
         this.navCtrl.push('CoreUserParticipantsPage', {courseId: this.course.id});
     }
 
     goToCompetenciesList(): void {
-        console.log(this.course)
-        console.log({courseId: this.course.id, userId: this.userId});
         this.navCtrl.push('AddonCompetencyCourseCompetenciesPage', {courseId: this.course.id, userId: this.userId});
     }
 
