@@ -27,6 +27,7 @@ import { CoreFileUploaderHelperProvider } from '@core/fileuploader/providers/hel
 import { CoreUserDelegate, CoreUserProfileHandlerData } from '../../providers/user-delegate';
 import { CoreSplitViewComponent } from '@components/split-view/split-view';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 /**
  * Page that displays an user profile page.
@@ -48,7 +49,7 @@ export class CoreUserProfilePage {
     user: any;
     title: string;
     evocoins: string;
-    statusRequest: boolean = false;
+    statusRequest = false;
     isDeleted = false;
     isEnrolled = true;
     canChangeProfilePicture = false;
@@ -83,18 +84,19 @@ export class CoreUserProfilePage {
                 this.user.address = this.userHelper.formatAddress('', data.user.city, data.user.country);
             }
         }, sitesProvider.getCurrentSiteId());
-         this.courseHelper.getCourse(11).then((data) => {
+         this.courseHelper.getCourse(8).then((data) => {
              this.course = data.course;
         });
     }
 
-    evocoinAPI(){
+    evocoinAPI(): Observable<object> {
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMjM0IiwiaWF0IjoxNTcyMzg2OTc0LCJzZWNyZXQiOiIxMSszRXYxdjBvM2tLa2VfNCJ9.jkTrhT-KoTjU9iITyPJlxBLovfBDEPVDLgJU5PhF2HY'
             })
         };
+
         return this.http.post('http://40.117.251.59/account/balance-of', { id_moodle: this.userId }, httpOptions);
     }
 
@@ -242,15 +244,19 @@ export class CoreUserProfilePage {
     }
 
     goToBadgedList(): void {
-        this.navCtrl.push('AddonBadgesUserBadgesPage', {courseId: this.course.id, userId: this.user.id});
+        console.log({courseId: this.course.id, userId: this.userId});
+        this.navCtrl.push('AddonBadgesUserBadgesPage', {courseId: this.course.id, userId: this.userId});
     }
 
     goToParticipantList(): void {
+        console.log({courseId: this.course.id});
         this.navCtrl.push('CoreUserParticipantsPage', {courseId: this.course.id});
     }
 
     goToCompetenciesList(): void {
-        this.navCtrl.push('AddonCompetencyCourseCompetenciesPage', {courseId: this.course.id, userId: this.user.id});
+        console.log(this.course)
+        console.log({courseId: this.course.id, userId: this.userId});
+        this.navCtrl.push('AddonCompetencyCourseCompetenciesPage', {courseId: this.course.id, userId: this.userId});
     }
 
     /**
@@ -270,15 +276,13 @@ export class CoreUserProfilePage {
      */
     ngOnInit(): void {
         this.evocoinAPI().subscribe((res: any) => {
-            //console.log(res);
-            if(res.status){
+            if (res.status) {
                 this.statusRequest = true;
                 this.evocoins = res.evocoin;
             } else {
-
+                this.statusRequest = false;
             }
-            //console.log(this.userId);
-        })
+        });
     }
 
     ngOnDestroy(): void {

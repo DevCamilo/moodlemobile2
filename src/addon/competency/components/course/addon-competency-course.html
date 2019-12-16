@@ -26,7 +26,7 @@
             </ion-item>
         </ion-card>
 
-        <h3 margin-horizontal *ngIf="competencies && competencies.statistics.competencycount > 0">{{ 'addon.competency.coursecompetencies' | translate }}</h3>
+        <h3 margin-horizontal *ngIf="competencies && competencies.statistics.competencycount > 0" style="color: white !important;">{{ 'addon.competency.coursecompetencies' | translate }}</h3>
         <ion-card *ngIf="user">
              <ion-item text-wrap>
                 <ion-avatar core-user-avatar [user]="user" item-start></ion-avatar>

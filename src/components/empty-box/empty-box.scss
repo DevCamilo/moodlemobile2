@@ -12,7 +12,7 @@ ion-app.app-root core-empty-box {
     z-index: -5;
 
     .core-empty-box-content {
-      color: $black;
+      color: white !important;
       margin: 0;
       display: table-cell;
       text-align: center;

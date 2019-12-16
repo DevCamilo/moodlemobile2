@@ -7,7 +7,8 @@
             <p *ngIf="course.displayname && course.shortname && course.fullname != course.displayname" class="core-course-shortname"><core-format-text [text]="course.shortname" contextLevel="course" [contextInstanceId]="course.id"></core-format-text></p>
             <h2>
                 <core-icon name="fa-star" *ngIf="course.isfavourite"></core-icon>
-                <core-format-text [text]="course.fullname" contextLevel="course" [contextInstanceId]="course.id"></core-format-text>
+                <!--<core-format-text [text]="course.fullname" contextLevel="course" [contextInstanceId]="course.id"></core-format-text>-->
+                <core-progress-bar [progress]="course.progress" *ngIf="showAll && course.progress != null && course.progress >= 0 && course.completionusertracked !== false"></core-progress-bar>
             </h2>
         </div>
 
@@ -33,9 +34,6 @@
                 <core-icon name="more"></core-icon>
             </button>
         </div>
-    </ion-item>
-    <ion-item *ngIf="showAll && course.progress != null && course.progress >= 0 && course.completionusertracked !== false">
-        <core-progress-bar [progress]="course.progress"></core-progress-bar>
     </ion-item>
     <ng-content></ng-content>
 </ion-card>

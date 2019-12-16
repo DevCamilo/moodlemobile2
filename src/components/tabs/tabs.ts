@@ -550,6 +550,8 @@ export class CoreTabsComponent implements OnInit, AfterViewInit, OnChanges, OnDe
                 return 'icon fa fa-line-chart';
             case 'Contenidos' || 'Contents':
                 return 'icon fa fa-newspaper-o';
+            case 'Finalización' || 'Completion':
+                return 'icon fa fa-hourglass-end';
             default:
                 return '';
         }
