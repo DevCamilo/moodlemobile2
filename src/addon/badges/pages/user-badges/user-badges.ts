@@ -42,8 +42,7 @@ export class AddonBadgesUserBadgesPage {
 
     constructor(navParams: NavParams, sitesProvider: CoreSitesProvider, private badgesProvider: AddonBadgesProvider,
             private domUtils: CoreDomUtilsProvider, private timeUtils: CoreTimeUtilsProvider) {
-
-        this.courseId = navParams.get('courseId') || 0; // Use 0 for site badges.
+        this.courseId = 0; // Use 0 for site badges.
         this.userId = navParams.get('userId') || sitesProvider.getCurrentSite().getUserId();
     }
 
